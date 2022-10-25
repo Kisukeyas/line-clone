@@ -12,6 +12,7 @@ function SignIn() {
   return (
     <div>
         <Button onClick={signInWithGoogle()}>Googleでログインする</Button>
+        <div>hogehoge</div>
     </div>
   )
 }
