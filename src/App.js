@@ -9,6 +9,7 @@ function App() {
   return (
     <div>
         {user ? <Line /> : <SignIn />}
+        <div>hoge</div>
     </div>
   );
 }
