@@ -1,8 +1,7 @@
 import React from 'react'
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material'
 
 function SignOut() {
   return (

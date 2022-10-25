@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { GoogleAuthProvider, signInWithRedirect, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import React from 'react'
 import { auth } from '../firebase';
 import GoogleIcon from '@mui/icons-material/Google';
