@@ -1,20 +1,18 @@
 import { Button } from '@mui/material'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect, signOut } from 'firebase/auth';
 import React from 'react'
 import { auth } from '../firebase';
 
 function SignIn() {
 
-    const signInWithGoogle = () => {
+    function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider);
+        signInWithRedirect(auth, provider).catch((err) => alert(err.message));
     };
+
   return (
     <div>
-        <Button onClick={signInWithGoogle()}>Googleでログインする</Button>
-        <div>hogehoge</div>
-        <div>hogehoge</div>
-        <div>hogehoge</div>
+        <Button onClick={signInWithGoogle}>Googleでログインする</Button>
     </div>
   )
 }
