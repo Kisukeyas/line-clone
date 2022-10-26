@@ -1,5 +1,5 @@
 import { Button, Input } from '@mui/material';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { auth, db } from '../firebase';
 import SendIcon from '@mui/icons-material/Send';
@@ -10,17 +10,20 @@ function SendMessage() {
 
     async function sendMessage(e){
         e.preventDefault();
-        await addDoc(collection(db, "messages"), {
+        const docRef = await addDoc(collection(db, "messages"), {
             text: message,
             photoURL: user.photoURL,
             uid:user.uid,
             createdAt: serverTimestamp(),
         });
+        setDoc(doc(db, "messages", docRef.id), {
+          docId: docRef.id
+      }, { merge : true});
         setMessage('');
     }
   return (
     <div>
-            <div className='sendMsg'>
+            <form className='sendMsg' onSubmit={sendMessage}>
             <Input style={{
               width: "78%",
               fontSize: "15px",
@@ -30,7 +33,7 @@ function SendMessage() {
             }}
             placeholder='メッセージを入力して下さい' type='text' onChange={(e) => setMessage(e.target.value)} value={message}/>
             <Button><SendIcon onClick={sendMessage}/></Button>
-            </div>
+            </form>
     </div>
   )
 }

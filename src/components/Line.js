@@ -1,4 +1,4 @@
-import { collection, limit, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, limit, onSnapshot, orderBy, query} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../firebase';
 import SendMessage from './SendMessage';
@@ -25,9 +25,9 @@ function Line() {
     <div>
         <SignOut />
         <div className='main'>
-            {messages.map(({id, text, photoURL, uid}) => (
-                <div className={uid === auth.currentUser.uid? "sent":"received"}>
-                    <div className={`msg ${uid === auth.currentUser.uid? "msg-sent":""}`} key={id}>
+            {messages.map(({docId, text, photoURL, uid}) => (
+                <div className={uid === auth.currentUser.uid? "sent":"received"} key={docId}>
+                    <div className={`msg ${uid === auth.currentUser.uid? "msg-sent":""}`}>
                         <img src={photoURL} alt=''/>
                         <p>{text}</p>
                     </div>
