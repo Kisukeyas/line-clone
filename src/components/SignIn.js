@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { getAdditionalUserInfo, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { getAdditionalUserInfo, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth';
 import React from 'react'
 import { auth, db } from '../firebase';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -9,7 +9,7 @@ function SignIn() {
 
     function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
+        signInWithRedirect(auth, provider)
         .then((result) => {
           const isNewUser = getAdditionalUserInfo(result).isNewUser
           if (isNewUser) {
