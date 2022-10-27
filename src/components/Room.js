@@ -23,9 +23,9 @@ function Room() {
 
   return (
     <div className='room'>
-        {rooms.map(({roomid, text, photoURL, uid }) => (
+        {rooms.map(({roomid, text, photoURL}) => (
                 <div className='btn-link' key={roomid}>
-                    <Link to={`/line`} state={ {roomid: roomid,sentUid: uid} }>
+                    <Link to={`/line`}>
                     <Button variant='outlined'>
                         <img src={photoURL} alt=''/>
                         <p>{text}</p>
