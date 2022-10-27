@@ -23,9 +23,9 @@ function Room() {
 
   return (
     <div className='room'>
-        {rooms.map(({roomid, text, photoURL, uid}) => (
+        {rooms.map(({roomid, text, photoURL, uid }) => (
                 <div className='btn-link' key={roomid}>
-                    <Link to={`/${roomid}`}>
+                    <Link to={`/line`} state={ {roomid: roomid,sentUid: uid} }>
                     <Button variant='outlined'>
                         <img src={photoURL} alt=''/>
                         <p>{text}</p>
@@ -33,9 +33,6 @@ function Room() {
                     </Link>
                 </div>
             ))}
-    <Link to='/'>
-            <Button>ホームに戻る</Button>
-    </Link>
     </div>
   )
 }

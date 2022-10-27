@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { auth, db } from '../firebase';
 import SendIcon from '@mui/icons-material/Send';
 
-function SendMessage() {
+
+function SendMessage({ state }) {
     const [message, setMessage] = useState("");
     const user = auth.currentUser;
 
@@ -15,6 +16,8 @@ function SendMessage() {
             photoURL: user.photoURL,
             uid:user.uid,
             createdAt: serverTimestamp(),
+            ToMessage: state.sentUid,
+            roomid: state.roomid,
         });
         setDoc(doc(db, "messages", docRef.id), {
           docId: docRef.id
