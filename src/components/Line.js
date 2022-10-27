@@ -1,4 +1,4 @@
-import { collection, limit, onSnapshot, orderBy, query, where} from 'firebase/firestore';
+import { collection, limit, onSnapshot, query, where} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { auth, db } from '../firebase';
@@ -9,7 +9,6 @@ import SignOut from './SignOut'
 function Line() {
     const [messages, setMessages] = useState([]);
     const { state } = useLocation();
-    const user = auth.currentUser;
 
     useEffect(() => {
         const data = async () => {
