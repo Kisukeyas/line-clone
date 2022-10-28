@@ -1,4 +1,11 @@
-import { Button } from "@mui/material";
+import {
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import {
   addDoc,
   arrayUnion,
@@ -12,6 +19,7 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { auth, db } from "../firebase";
 import Header from "./Header";
 
@@ -38,10 +46,11 @@ function Users() {
     data();
   }, []);
 
-  async function addRooms(sentUserUid, userName) {
+  async function addRooms(sentUserUid, userName, photoURL) {
     const docRef = await addDoc(collection(db, "rooms"), {
       joinedUser: arrayUnion(user.uid, sentUserUid),
       userDisplayName: arrayUnion(user.displayName, userName),
+      photoURL: arrayUnion(user.photoURL, photoURL),
       updateAt: serverTimestamp(),
       usersQuery: { [sentUserUid]: true, [user.uid]: true },
     });
@@ -64,28 +73,39 @@ function Users() {
     return count;
   }
 
-  async function goToRoom(sentUserUid, userName) {
+  async function goToRoom(sentUserUid, userName, photoURL) {
     const countRooms = await checkIsRoom(sentUserUid);
     if (!countRooms) {
-      addRooms(sentUserUid, userName);
+      addRooms(sentUserUid, userName, photoURL);
     }
   }
 
   return (
-    <div className="user">
+    <div className="main">
       <Header />
-      {users.map(({ userName, photoURL, uid, count }) => (
-        <div className="btn-link" key={uid}>
-          <Button variant="outlined">
-            <img src={photoURL} alt="" />
-            {user.uid === uid ? <p>自分</p> : <p>{userName}</p>}
-            <p>{count}</p>
-          </Button>
-          <Button variant="outlined" onClick={() => goToRoom(uid, userName)}>
-            Roomに移動
-          </Button>
-        </div>
-      ))}
+      <List>
+        {users.map(({ userName, photoURL, uid }) => (
+          <Link
+            to="/rooms"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+            key={uid}
+          >
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => goToRoom(uid, userName, photoURL)}>
+                <ListItemAvatar>
+                  <Avatar src={photoURL} alt="" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`${user.uid === uid ? "自分" : userName}`}
+                />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        ))}
+      </List>
     </div>
   );
 }

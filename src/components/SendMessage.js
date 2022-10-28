@@ -5,6 +5,7 @@ import {
   doc,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
@@ -30,6 +31,9 @@ function SendMessage({ state }) {
       },
       { merge: true }
     );
+    await updateDoc(doc(db, "rooms", state), {
+      updateAt: serverTimestamp(),
+    });
     setMessage("");
   }
   return (

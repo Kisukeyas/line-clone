@@ -18,24 +18,23 @@ code {
 }
 
 .header-item {
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 header {
   background-color: #222a41;
   color: white;
-  height: 75px;
+  height: 65px;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .main {
-  padding-top: 75px;
+  padding-top: 65px;
   padding-bottom: 60px;
 }
 
@@ -56,7 +55,7 @@ img {
 
 .msg {
   display: flex;
-  margin: 20px;
+  margin: 10px;
   border-radius: 3000px;
   box-shadow: 0 0 10px rgb(164, 164, 164);
   align-items: center;
@@ -82,13 +81,4 @@ img {
   padding: 10px;
   padding-bottom: 20px;
   background-color: #fafafa;
-}
-
-.user {
-  text-align: center;
-  padding: 100px 0;
-}
-
-.btn-link {
-  margin-top: 50px;
 }
