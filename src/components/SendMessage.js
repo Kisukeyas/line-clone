@@ -10,13 +10,14 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import SendIcon from "@mui/icons-material/Send";
 
-function SendMessage() {
+function SendMessage({ state }) {
   const [message, setMessage] = useState("");
   const user = auth.currentUser;
 
   async function sendMessage(e) {
     e.preventDefault();
     const docRef = await addDoc(collection(db, "messages"), {
+      roomId: state,
       text: message,
       photoURL: user.photoURL,
       uid: user.uid,
